@@ -15,7 +15,6 @@ Param(
   $AzureEnvironment = 'AzureCloud'
 )
 
-
 if ($Debugging.IsPresent) { $DebugPreference = 'Continue' } else { $DebugPreference = 'silentlycontinue' }
 
 Clear-Host
@@ -94,7 +93,6 @@ $Global:Runtime = Measure-Command -Expression {
         Write-Host 'This script required PowerShell 7, please run from a PowerShell 7 console' -ForegroundColor Red
         Exit
       }
-
     } catch {
       # Report Error
       $errorMessage = $_.Exception.Message
@@ -153,7 +151,7 @@ $Global:Runtime = Measure-Command -Expression {
       if ([string]::IsNullOrEmpty($TenantID)) {
         Write-Host 'Tenant ID not specified.'
         Write-Host ''
-        Connect-AzAccount -WarningAction SilentlyContinue -Environment $AzureEnvironment
+        Connect-AzAccount -WarningAction SilentlyContinue
         $Tenants = Get-AzTenant
         if ($Tenants.count -gt 1) {
           Write-Host 'Select the Azure Tenant to connect : '
